@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                     <div class="meme-text-container">
                         <div class="meme-text">meowl wishes you a<br>happy birthday</div>
-                        <div class="meme-text">you are meowl's<br>favorite person<br></div>
+                        <div class="meme-text">you are meowl's<br>favorite person</div>
                         <div class="meme-text">hows ur knee</div>
                     </div>
                 </div>
