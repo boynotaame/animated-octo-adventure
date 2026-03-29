@@ -1,0 +1,548 @@
+/* APPLE AESTHETIC INTRO & BASE CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+
+/* FIXED OVERFLOW CUT-OFFS AND REMOVED SCROLLBARS */
+body, html {
+    margin: 0; padding: 0;
+    background-color: #050a14; 
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    height: 100vh; /* Locks exactly to screen height */
+    overflow: hidden; /* ABSOLUTELY PREVENTS ALL SCROLLBARS */
+    display: flex; justify-content: center; align-items: center;
+    text-align: center;
+    touch-action: none; 
+}
+
+/* Intro Sequence */
+#intro {
+    display: flex; flex-direction: column; gap: 20px;
+    position: absolute; z-index: 50;
+}
+.fade-text {
+    opacity: 0; 
+    transform: translateY(20px);
+    /* Much faster, snappier fade transitions */
+    transition: opacity 1.5s ease, transform 1.5s ease; 
+    font-size: 1.5rem; font-weight: 600;
+}
+
+/* MAKES THE GIF ACT LIKE A REAL EMOJI */
+.inline-emoji {
+    height: 1.4em; /* Scales the GIF perfectly to match the font height! */
+    width: auto;
+    vertical-align: middle; /* Centers it vertically next to the text */
+    margin: 0 4px; /* Adds a tiny bit of space on the sides */
+    display: inline-block;
+}
+
+.fade-text.visible { opacity: 1; transform: translateY(0); }
+
+/* ---------------- GAME SCREEN ---------------- */
+#game-screen {
+    display: none; flex-direction: column; align-items: center; width: 100%;
+    opacity: 0; transition: opacity 2s ease;
+    position: relative; top: 20px;
+}
+
+/* --- HYPER-REALISTIC HSR CABINET --- */
+.hsr-cabinet {
+    position: relative;
+    width: 290px;
+    margin-left: 15px;  /* Balanced so the left side isn't pushed off screen */
+    margin-right: 35px; /* Space for the lever */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    filter: drop-shadow(0 25px 35px rgba(0,0,0,0.9));
+}
+
+/* 1. TOP MARQUEE */
+.cabinet-top {
+    width: 90%; height: 85px;
+    background: linear-gradient(180deg, #1c6b7a, #0b2f3b);
+    border: 4px solid #c8a97e;
+    border-bottom: none; border-radius: 15px 15px 0 0;
+    display: flex; justify-content: center; align-items: center;
+    box-shadow: inset 0 8px 15px rgba(255,255,255,0.1), inset 0 -5px 15px rgba(0,0,0,0.5);
+    position: relative; z-index: 2;
+    box-sizing: border-box; /* Forces border inside the 90% width */
+}
+.marquee-sign {
+    background: linear-gradient(135deg, #fdf5e6, #d4c4a1);
+    width: 80%; height: 60%;
+    border-radius: 8px; border: 2px solid #8a6a3b;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: 0 0 20px rgba(232,220,196,0.4), inset 0 0 10px rgba(138,106,59,0.3);
+}
+.marquee-title { color: #4a3518; font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); }
+.marquee-subtitle { color: #8a6a3b; font-size: 0.75rem; font-weight: 800; }
+
+/* 2. MIDDLE SCREEN AREA */
+.cabinet-screen-area {
+    width: 100%;
+    background: linear-gradient(180deg, #185a6b 0%, #0a2530 100%);
+    border: 4px solid #c8a97e;
+    padding: 25px 0;
+    display: flex; justify-content: center; align-items: center;
+    position: relative; z-index: 3;
+    box-shadow: inset 0 10px 30px rgba(0,0,0,0.8);
+    box-sizing: border-box; /* Forces border inside the 100% width */
+}
+.slots-glass {
+    background: #02050a;
+    padding: 15px 10px;
+    border-radius: 10px; border: 3px solid #2a5a63;
+    display: flex; gap: 8px;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.9), 0 0 15px rgba(42,90,99,0.4);
+}
+.slot {
+    width: 55px; height: 75px; 
+    background: linear-gradient(180deg, #e6e6e6, #ffffff, #d9d9d9);
+    border: 2px solid #a37c44; border-radius: 5px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 2rem; overflow: hidden;
+    box-shadow: inset 0 5px 15px rgba(0,0,0,0.4);
+}
+.slot img { width: 100%; height: 100%; object-fit: cover; display: none; }
+
+/* Red Pointers */
+.pointer {
+    width: 0; height: 0;
+    border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+    position: absolute; z-index: 10; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+}
+.left-pointer { border-left: 15px solid #e53935; left: 10px; }
+.right-pointer { border-right: 15px solid #e53935; right: 10px; }
+
+/* 3. CONTROL PANEL */
+.cabinet-control-panel {
+    width: 100%; height: 45px;
+    background: linear-gradient(180deg, #e0c59a, #a6814c 40%, #5c4322);
+    border-left: 4px solid #4a3518; border-right: 4px solid #4a3518;
+    display: flex; justify-content: space-around; align-items: center;
+    box-sizing: border-box; padding: 0 20px; z-index: 4;
+    box-shadow: 0 15px 15px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.4);
+}
+.coin-slots { display: flex; gap: 6px; }
+.coin-slot { width: 5px; height: 22px; background: #111; border-radius: 2px; border-right: 1px solid #ffebc2; box-shadow: inset 2px 2px 5px #000; }
+.panel-details { display: flex; gap: 10px; }
+.slider { width: 30px; height: 8px; background: #111; border-radius: 4px; border-bottom: 2px solid #ffebc2; box-shadow: inset 0 3px 5px #000;}
+
+/* 4. BOTTOM BELLY */
+.cabinet-bottom {
+    width: 95%; height: 110px;
+    background: linear-gradient(180deg, #0a2530, #041017);
+    border: 4px solid #c8a97e; border-top: none; border-bottom: none;
+    display: flex; justify-content: center; align-items: center;
+    box-sizing: border-box; /* Forces border inside the 95% width */
+}
+.glass-belly {
+    width: 65%; height: 75%;
+    background: rgba(10, 20, 30, 0.9);
+    border: 3px solid #2a5a63; border-radius: 0 0 45px 45px;
+    position: relative; overflow: hidden;
+    box-shadow: inset 0 15px 25px rgba(0,0,0,0.9), 0 5px 15px rgba(0,0,0,0.5);
+}
+.liquid-glow {
+    position: absolute; bottom: -15px; width: 100%; height: 60%;
+    background: radial-gradient(ellipse at bottom, rgba(200,169,126,0.5) 0%, transparent 70%); filter: blur(6px);
+}
+
+/* 5. BASE */
+.cabinet-base { width: 105%; display: flex; flex-direction: column; align-items: center; }
+.base-tier { width: 100%; background: #041017; border: 4px solid #c8a97e; box-sizing: border-box;}
+.tier-1 { height: 15px; border-radius: 5px 5px 0 0; background: linear-gradient(90deg, #0a2530, #185a6b, #0a2530);}
+.tier-2 { height: 15px; width: 95%; background: #081a28; border-top: none; }
+.tier-3 { height: 25px; width: 90%; border-top: none; border-radius: 0 0 12px 12px; box-shadow: 0 15px 25px #000;}
+
+
+/* ---------------- 6. TRUE 3D PULL LEVER (GOLD & GREEN HSR THEME) ---------------- */
+.lever-container {
+    position: absolute; right: -50px; top: 50%; transform: translateY(-50%);
+    height: 200px; width: 60px; z-index: 10;
+    perspective: 800px; 
+    user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
+}
+.lever-mount {
+    position: absolute; left: 0; 
+    top: 70px; 
+    width: 30px; height: 60px;
+    /* Gold outer casing with a deep green/teal recessed groove in the middle */
+    background: linear-gradient(90deg, #c8a97e 0%, #8a6a3b 25%, #8a6a3b 75%, #c8a97e 100%);
+    border-radius: 8px; border: 2px solid #5c4322;
+    box-shadow: -5px 10px 20px rgba(0,0,0,0.8), inset 0 0 8px rgba(0,0,0,0.9);
+}
+.lever-arm {
+    position: absolute; 
+    left: 10px; 
+    bottom: 100px; 
+    width: 10px; height: 100px;
+    transform-origin: bottom center; 
+    transform-style: preserve-3d;
+    transform: translateZ(15px) rotateX(0deg); 
+    cursor: grab;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
+}
+.lever-arm:active { cursor: grabbing; }
+.lever-rod {
+    position: absolute; left: 0; bottom: 0;
+    width: 10px; height: 100%;
+    /* Polished 3D Gold Rod */
+    background: linear-gradient(90deg, #5c4322, #c8a97e 30%, #fdf5e6 50%, #c8a97e 70%, #5c4322);
+    border-radius: 5px; border: 1px solid #4a3518;
+    box-shadow: -2px 5px 10px rgba(0,0,0,0.6);
+}
+.lever-knob {
+    position: absolute; left: -16px; top: -16px;
+    width: 38px; height: 38px;
+    /* Hyper-realistic 3D Gold sphere */
+    background: radial-gradient(circle at 35% 25%, #fff 0%, #fdf5e6 10%, #c8a97e 45%, #8a6a3b 75%, #332512 100%);
+    border-radius: 50%;
+    /* Thick Teal/Green rim */
+    border: 3px solid #1c6b7a;
+    /* Main drop shadow + slight teal inner glow to blend the border */
+    box-shadow: -5px 15px 15px rgba(0,0,0,0.8), inset 0 0 6px rgba(28,107,122,0.8);
+    transition: box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+
+/* ---------------- RESULT PAGES (FULL SCREEN) ---------------- */
+#result-page {
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    width: 100%; 
+    height: 100vh; /* Locks to screen height */
+    overflow-y: auto; /* Allows ONLY the result page to scroll vertically if needed */
+    overflow-x: hidden;
+    opacity: 0; transition: opacity 1s ease;
+    padding: 40px 20px; box-sizing: border-box;
+    position: absolute; top: 0; left: 0; 
+    background-color: #050a14; 
+    z-index: 100;
+}
+.result-text { font-size: 1.2rem; line-height: 1.5; margin-bottom: 20px; font-weight: 600; text-shadow: 0 2px 5px #000; }
+video { max-width: 300px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #c8a97e; box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
+
+#return-btn {
+    margin-top: 20px;
+    background: linear-gradient(90deg, #c8a97e, #8a6a3b);
+    color: #fff; border: 2px solid #fdf5e6;
+    padding: 15px 35px; font-size: 1.2rem; font-weight: 800;
+    border-radius: 30px; cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+#return-btn:active { transform: scale(0.95); }
+
+
+/* ---------------- MOBILE RESPONSIVE FIXES ---------------- */
+@media (max-width: 450px) {
+    .hsr-cabinet {
+        transform: scale(0.85); /* Scales down smoothly for small phones */
+        /* Re-centers it perfectly on mobile so the lever fits */
+        margin-left: 0;
+        margin-right: 15px; 
+    }
+}
+
+/* ---------------- DRAMATIC SPIN ANIMATIONS ---------------- */
+.machine-shake {
+    animation: cabinet-shake 0.15s infinite;
+}
+@keyframes cabinet-shake {
+    0% { translate: 1px 1px; rotate: 0deg; }
+    25% { translate: -1px -2px; rotate: -1deg; }
+    50% { translate: -3px 0px; rotate: 1deg; }
+    75% { translate: 3px 2px; rotate: 0deg; }
+    100% { translate: 1px -1px; rotate: 1deg; }
+}
+.dramatic-spin {
+    animation: spin-blur 0.15s infinite alternate;
+}
+@keyframes spin-blur {
+    0% { filter: blur(1px) brightness(1.2); transform: scale(1.05) translateY(-4px); }
+    100% { filter: blur(4px) brightness(1.2); transform: scale(1.05) translateY(4px); }
+}
+
+/* ---------------- DROP & EXPAND TRANSITION (STRETCH & FILL FIX) ---------------- */
+#transition-item {
+    position: fixed;
+    /* Pins it to the exact absolute dead center of any screen */
+    left: 50%; top: 50%;
+    
+    opacity: 0; 
+    z-index: 99999; 
+    pointer-events: none;
+    
+    /* object-fit: cover ensures the image stretches completely with no empty borders */
+    object-fit: cover; 
+    will-change: transform, width, height, opacity;
+}
+
+.drop-anim {
+    animation: dropIntoBelly 0.6s cubic-bezier(0.5, 0, 0.8, 0.2) forwards;
+}
+@keyframes dropIntoBelly {
+    0% { 
+        width: 55px; height: 75px;
+        border: 2px solid #c8a97e; border-radius: 5px;
+        /* Starts slightly above center (where the slots are) */
+        transform: translate(-50%, -120px) rotate(0deg) scale(1); 
+        opacity: 1; 
+    }
+    100% { 
+        width: 55px; height: 75px;
+        border: 2px solid #c8a97e; border-radius: 5px;
+        /* Drops down into the belly */
+        transform: translate(-50%, 120px) rotate(15deg) scale(0.6); 
+        opacity: 1; 
+    }
+}
+
+.expand-anim {
+    animation: expandToScreen 0.7s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+}
+@keyframes expandToScreen {
+    0% { 
+        width: 55px; height: 75px;
+        border: 2px solid #c8a97e; border-radius: 5px;
+        transform: translate(-50%, 120px) rotate(15deg) scale(0.6); 
+        opacity: 1; 
+    }
+    100% { 
+        /* Physically expands to cover 100% of the screen width and height! */
+        width: 100vw; height: 100vh;
+        border: 0px solid transparent; border-radius: 0px;
+        /* Snaps perfectly to the dead center of the screen */
+        transform: translate(-50%, -50%) rotate(0deg) scale(1); 
+        opacity: 0; /* Fades out smoothly into the Result Page */
+    }
+}
+
+/* ---------------- MEME RESULT PAGE LAYOUT (MEOWL/KANYE) ---------------- */
+.meme-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.meme-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Pushes image towards the center */
+}
+
+/* We use drop-shadow instead of box-shadow so it perfectly traces your transparent PNG! */
+.meme-image-container img {
+    max-width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+}
+
+.meme-text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; /* Aligns text exactly like your mockup */
+}
+
+.meme-text {
+    color: #000; /* Black text like the mockup */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    /* This subtle white glow ensures the black text is readable even if you use a dark background image */
+    text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* MOBILE FIX FOR THE MEME LAYOUT */
+@media (max-width: 700px) {
+    .meme-layout {
+        flex-direction: column; /* Stacks image on top, text on bottom for phones */
+        text-align: center;
+        gap: 15px;
+    }
+    .meme-image-container {
+        justify-content: center;
+    }
+    .meme-text-container {
+        text-align: center;
+    }
+    .meme-text {
+        font-size: 1.3rem; /* Scales text down slightly for mobile */
+    }
+}
+
+/* Update Spins Left indicator so it's always readable over your custom background */
+.spins-badge {
+    background: rgba(0, 0, 0, 0.7);
+    color: #c8a97e;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid #c8a97e;
+    font-size: 0.95rem; font-weight: 800; 
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 30px;
+    z-index: 10;
+}
+
+/* ---------------- THE GOOFY MEOWL BOUNCE ---------------- */
+.bouncing-meowl {
+    max-width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+    
+    /* Anchors the rotation to its feet instead of its belly */
+    transform-origin: bottom center; 
+    
+    /* 1.2 seconds for a full left-and-right cycle */
+    animation: happy-hop 1.2s infinite; 
+}
+
+@keyframes happy-hop {
+    /* On the ground: 0%, 50%, and 100% of the time */
+    0%, 50%, 100% {
+        transform: translateY(0) rotate(0deg);
+        animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); /* Shoots up quickly */
+    }
+    /* Up in the air, tilted right */
+    25% {
+        transform: translateY(-40px) rotate(12deg);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1); /* Falls back down accelerating */
+    }
+    /* Up in the air, tilted left */
+    75% {
+        transform: translateY(-40px) rotate(-12deg);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1); /* Falls back down accelerating */
+    }
+}
+
+/* ---------------- EXTRA TEXT STYLING ---------------- */
+.sound-hint {
+    font-size: 0.9rem !important; /* Forces it to be smaller than the main text */
+    font-style: italic;
+    color: #888; /* Slightly faded grey so it's not too loud */
+    margin-bottom: -10px; /* Pulls it slightly closer to 'Hi' */
+}
+
+.now-playing {
+    color: #c8a97e; /* Matches the Penacony gold theme */
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-top: -15px; /* Pulls it up close to the Spins Left badge */
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 3px #000; /* Keeps it readable over any background */
+}
+
+/* ---------------- THE CHILL KANYE FLOAT ---------------- */
+.kanye-float {
+    animation: chill-float 4s ease-in-out infinite;
+}
+
+@keyframes chill-float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(2deg); /* Floats up slowly with a tiny tilt */
+    }
+}
+
+/* ---------------- STICKMAN PARTY (SPIN 3) ---------------- */
+.stickman-party-layout {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw; /* Spans the entire screen width to push them apart! */
+    max-width: 1200px;
+    margin: 20px auto;
+    min-height: 350px;
+}
+
+.stickman-cluster {
+    position: absolute;
+    width: 220px; /* MUCH BIGGER NOW */
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    z-index: 1; /* Puts them slightly behind text if the screen gets too small */
+}
+
+.stickman-left {
+    left: 5%; /* Pinned to the far left side */
+    animation: stickman-dance-left 1s infinite;
+}
+
+.stickman-right {
+    right: 5%; /* Pinned to the far right side */
+    animation: stickman-dance-right 1s infinite;
+    animation-delay: 0.5s; 
+}
+
+/* Bounces higher, rotates, and violently flips horizontally (scaleX) at the bottom */
+@keyframes stickman-dance-left {
+    0%   { transform: translateY(0) scaleX(1) rotate(0deg); }
+    25%  { transform: translateY(-80px) scaleX(1) rotate(-15deg); }
+    49%  { transform: translateY(0) scaleX(1) rotate(0deg); }
+    50%  { transform: translateY(0) scaleX(-1) rotate(0deg); }
+    75%  { transform: translateY(-80px) scaleX(-1) rotate(15deg); }
+    100% { transform: translateY(0) scaleX(-1) rotate(0deg); }
+}
+
+@keyframes stickman-dance-right {
+    0%   { transform: translateY(0) scaleX(-1) rotate(0deg); }
+    25%  { transform: translateY(-80px) scaleX(-1) rotate(15deg); }
+    49%  { transform: translateY(0) scaleX(-1) rotate(0deg); }
+    50%  { transform: translateY(0) scaleX(1) rotate(0deg); }
+    75%  { transform: translateY(-80px) scaleX(1) rotate(-15deg); }
+    100% { transform: translateY(0) scaleX(1) rotate(0deg); }
+}
+
+.twin-text-container {
+    z-index: 10;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Matches your image */
+    font-weight: 800;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Very subtle shadow so it pops */
+    padding: 0 20px;
+}
+
+.twin-line { 
+    margin-bottom: 30px; 
+}
+
+/* Shrinks the stickmen slightly ONLY on very small phone screens so they don't completely crush the text */
+@media (max-width: 600px) {
+    .stickman-cluster { width: 130px; }
+    .twin-text-container { font-size: 1.4rem; }
+    .stickman-left { left: -10px; }
+    .stickman-right { right: -10px; }
+}
+
+
+/* ---------------- CLOSING MESSAGE (SPIN 3) ---------------- */
+.close-website-msg {
+    opacity: 0; /* Hidden by default */
+    transition: opacity 1s ease;
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7); /* Slightly faded white so it's not distracting */
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Keeps it readable over the gradient */
+}

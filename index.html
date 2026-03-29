@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- APPLE AESTHETIC INTRO SEQUENCE -->
+    <div id="intro">
+
+      <div class="fade-text sound-hint" id="text-sound">turn ur sound on if u can</div>
+
+      <div class="fade-text" id="text1">Hi sharon</div>
+      <div class="fade-text" id="text2">Happy 16th Birthday to my favorite person <img src="discord.gif" class="inline-emoji" alt="tongue out"> 🎉🎉</div>
+      <div class="fade-text" id="text3">u getting old</div>
+      <div class="fade-text" id="text4">spin ts rq</div>
+    </div>
+
+    <!-- HSR SLOT MACHINE GAME SEQUENCE -->
+    <div id="game-screen">
+        <div class="hsr-cabinet">
+
+            <!-- TOP MARQUEE (The glowing sign) -->
+            <div class="cabinet-top">
+                <div class="marquee-sign">
+                    <div class="marquee-title">Pull The Knob</div>
+                    <div class="marquee-subtitle" id="spins-left">SPINS LEFT: 3</div>
+                </div>
+            </div>
+
+            <!-- MIDDLE SCREEN AREA (The teal part with slots) -->
+            <div class="cabinet-screen-area">
+                <div class="pointer left-pointer"></div>
+                <div class="slots-glass">
+                    <div class="slot"><span id="s1-txt">❓</span><img id="s1-img" src="" alt="slot 1"></div>
+                    <div class="slot"><span id="s2-txt">❓</span><img id="s2-img" src="" alt="slot 2"></div>
+                    <div class="slot"><span id="s3-txt">❓</span><img id="s3-img" src="" alt="slot 3"></div>
+                </div>
+                <div class="pointer right-pointer"></div>
+            </div>
+
+            <!-- CONTROL PANEL (The slanted ledge with coin slots) -->
+            <div class="cabinet-control-panel">
+                <div class="coin-slots">
+                    <div class="coin-slot"></div>
+                    <div class="coin-slot"></div>
+                    <div class="coin-slot"></div>
+                    <div class="coin-slot"></div>
+                </div>
+                <div class="panel-details">
+                    <div class="slider"></div>
+                    <div class="slider"></div>
+                </div>
+            </div>
+
+            <!-- BOTTOM BELLY (The glass coin tray) -->
+            <div class="cabinet-bottom">
+                <div class="glass-belly">
+                    <div class="liquid-glow"></div>
+                </div>
+            </div>
+
+            <!-- BASE (The feet) -->
+            <div class="cabinet-base">
+                <div class="base-tier tier-1"></div>
+                <div class="base-tier tier-2"></div>
+                <div class="base-tier tier-3"></div>
+            </div>
+
+            <!-- THE INTERACTIVE LEVER -->
+            <div class="lever-container">
+                <div class="lever-mount"></div>
+                <div class="lever-arm" id="lever">
+                    <div class="lever-rod"></div>
+                    <div class="lever-knob"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="result-page">
+        <div id="result-content"></div>
+        <button id="return-btn" onclick="returnToMachine()">Next Spin</button>
+    </div>
+
+    <img id="transition-item" src="" alt="">
+
+    <!-- AUDIO FILES -->
+    <audio id="audio-knee" src="knee.mp3"></audio>
+    <audio id="audio-wonder" src="wonder.mp3"></audio>
+    <audio id="audio-stickman" src="sawurface.mp3"></audio>
+    <audio id="audio-rock" src="rock.mp3" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
