@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => document.getElementById('text-sound').classList.add('visible'), 200); 
 
     setTimeout(() => document.getElementById('text1').classList.add('visible'), 500);
-    setTimeout(() => document.getElementById('text2').classList.add('visible'), 2000);
-    setTimeout(() => document.getElementById('text3').classList.add('visible'), 4000);
-    setTimeout(() => document.getElementById('text4').classList.add('visible'), 5500);
+    setTimeout(() => document.getElementById('text2').classList.add('visible'), 3000);
+    setTimeout(() => document.getElementById('text3').classList.add('visible'), 5000);
+    setTimeout(() => document.getElementById('text4').classList.add('visible'), 6500);
 
     setTimeout(() => {
         document.getElementById('intro').style.display = 'none';
