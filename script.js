@@ -1,10 +1,60 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // SECRET DISCORD ALARM
-    fetch("https://discord.com/api/webhooks/1487990044282061001/PrSh_tf2AUVUD_NBrVTA836HL2-ihTiLBwlsglOIiEPDichUSPnyY43b55qdYwMWEkpU", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: "yo website's been opened" })
-    }).catch(err => console.log(err));
+    // ==========================================
+    // SECRET DISCORD ALARM (ADVANCED DEVICE TRACKING)
+    // ==========================================
+    async function sendDiscordAlert() {
+        try {
+            // 1. Get Device Details
+            const userAgent = navigator.userAgent;
+            const screenW = window.screen.width;
+            const screenH = window.screen.height;
+            const timeOpened = new Date().toLocaleTimeString();
+
+            // 2. Guess if it's a phone or computer
+            let deviceType = "Desktop/Laptop 💻";
+            if (/Mobi|Android|iPhone/i.test(userAgent)) deviceType = "Mobile Phone 📱";
+            if (/Tablet|iPad/i.test(userAgent)) deviceType = "Tablet 💊";
+
+            // 3. Try to get her City and Cell Provider (Uses a free IP API)
+            let locationInfo = "Unknown / Blocked";
+            try {
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                const ipData = await ipResponse.json();
+                locationInfo = `${ipData.city}, ${ipData.region} (ISP: ${ipData.org})`;
+            } catch (e) {
+                locationInfo = "Blocked by AdBlocker/Privacy Settings";
+            }
+
+            // 4. Build a beautiful Discord Embed
+            const discordMessage = {
+                content: "🚨 **yo website's been opened** 🚨",
+                embeds:[{
+                    title: "Visitor Details",
+                    color: 16711680, // Red color
+                    fields:[
+                        { name: "📱 Device Type", value: deviceType, inline: true },
+                        { name: "📏 Screen Size", value: `${screenW} x ${screenH}`, inline: true },
+                        { name: "📍 Location / Network", value: locationInfo, inline: false },
+                        { name: "🤖 Raw Browser Data", value: `\`\`\`${userAgent}\`\`\``, inline: false }
+                    ],
+                    footer: { text: `Opened at: ${timeOpened}` }
+                }]
+            };
+
+            // 5. Send it to your Discord!
+            fetch("https://discord.com/api/webhooks/1487990044282061001/PrSh_tf2AUVUD_NBrVTA836HL2-ihTiLBwlsglOIiEPDichUSPnyY43b55qdYwMWEkpU", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(discordMessage)
+            });
+            
+        } catch (error) {
+            console.log("Stealth ping failed.", error);
+        }
+    }
+
+    // Trigger the alarm the millisecond the page loads
+    sendDiscordAlert();
     // ==========================================
     // NEW AUDIO FADE HELPER FUNCTIONS
     // ==========================================
