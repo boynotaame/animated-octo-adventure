@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+    // SECRET DISCORD ALARM
+    fetch("https://discord.com/api/webhooks/1487990044282061001/PrSh_tf2AUVUD_NBrVTA836HL2-ihTiLBwlsglOIiEPDichUSPnyY43b55qdYwMWEkpU", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: "yo website's been opened" })
+    }).catch(err => console.log(err));
     // ==========================================
     // NEW AUDIO FADE HELPER FUNCTIONS
     // ==========================================
